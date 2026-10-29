@@ -1,10 +1,11 @@
+import hashlib
 import random
 import string
 
 from django.contrib import messages
 from django.contrib.auth import login
 from django.conf import settings
-from django.http import HttpResponse, HttpResponseBadRequest
+from django.http import HttpResponse, HttpResponseBadRequest, JsonResponse
 from django.shortcuts import redirect, render
 from django.views.decorators.csrf import csrf_exempt
 
@@ -330,5 +331,17 @@ def software_and_data_integrity_failure(request):
         return render(
             request, "Lab_2021/A8_software_and_data_integrity_failure/desc.html"
         )
+
+
+@csrf_exempt
+def file_checksum(request):
+    if request.method != "POST":
+        return JsonResponse({"error": "POST required"}, status=405)
+    if "file" not in request.FILES:
+        return JsonResponse({"error": "No file uploaded"}, status=400)
+    md5 = hashlib.md5()
+    for chunk in request.FILES["file"].chunks():
+        md5.update(chunk)
+    return JsonResponse({"md5": md5.hexdigest()})
 
 

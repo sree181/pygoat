@@ -29,4 +29,5 @@ urlpatterns = [
     path("A03", views.supply_chain_failures, name="supply_chain_failures"),
     path("auth_failure", views.auth_failure, name="auth_failure"),
     path("2021/A8", views.software_and_data_integrity_failure, name="A8"),
+    path("file_checksum/", views.file_checksum, name="file_checksum"),
 ]
