@@ -333,6 +333,22 @@ def software_and_data_integrity_failure(request):
         )
 
 
+def file_md5(path):
+    md5 = hashlib.md5()
+    with open(path, "rb") as f:
+        for chunk in iter(lambda: f.read(8192), b""):
+            md5.update(chunk)
+    return md5.hexdigest()
+
+
+def file_sha1(path):
+    sha1 = hashlib.sha1()
+    with open(path, "rb") as f:
+        for chunk in iter(lambda: f.read(8192), b""):
+            sha1.update(chunk)
+    return sha1.hexdigest()
+
+
 @csrf_exempt
 def file_checksum(request):
     if request.method != "POST":
