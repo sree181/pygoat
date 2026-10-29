@@ -333,12 +333,12 @@ def software_and_data_integrity_failure(request):
         )
 
 
-def file_md5(path):
-    md5 = hashlib.md5()
+def file_sha256(path):
+    sha256 = hashlib.sha256()
     with open(path, "rb") as f:
         for chunk in iter(lambda: f.read(8192), b""):
-            md5.update(chunk)
-    return md5.hexdigest()
+            sha256.update(chunk)
+    return sha256.hexdigest()
 
 
 def file_sha1(path):
