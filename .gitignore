@@ -15,3 +15,12 @@ bin
 # vscode
 .vscode/
 
+
+# MeshAgent pilot: per-machine recorder settings, never committed
+.meshagent.json
+.meshagent/
+.claude/settings.json
+.claude/settings.json.meshagent-backup
+.claude/settings.local.json
+.cursor/hooks.json
+.cursor/hooks.json.meshagent-backup
